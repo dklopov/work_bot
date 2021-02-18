@@ -32,7 +32,7 @@ def create_conf_control(create_conf_message):
 
 @bot.message_handler(commands=["change_conf"])
 def change_conf_command_start(message):
-    bot.send_message(message.from_user.id, 'Укажи количество измененных конфигураций')
+    bot.send_message(message.from_user.id, 'Укажи количество измененных конфигураций ')
     change_conf_message = message
     bot.register_next_step_handler(change_conf_message, change_conf_control)
 
