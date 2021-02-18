@@ -23,7 +23,3 @@ else:
             print('create_conf:', user_input_work, '\nuser_id:', user_id, '\ndatetime:', datetime.now())
     else:
         print('Хорошо подумай, прежде чем мне такое писать')
-
-
-
-
