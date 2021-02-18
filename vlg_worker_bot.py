@@ -1,5 +1,6 @@
 import telebot
 from datetime import datetime
+import re
 
 bot = telebot.TeleBot("1607313958:AAFyKoJWe7TrDiP0ysplOz8GoYWDnKuZ7Pg")
 
@@ -17,10 +18,10 @@ def create_conf_control(create_conf_message):
     count_create_conf = str(create_conf_message.text)
     date_time = str(datetime.now())
     to_chat_id = -1001427883840  # id чата vlg_worker_bot_report
-    check_message_text = int(create_conf_message.text)
-    if isinstance(check_message_text, int) and check_message_text > 0:
+    check_message_text = int(re.sub('\D', '', count_create_conf))  # вырезаем все символы и приводим к int
+    if isinstance(check_message_text, int) and check_message_text > 0:  # проверяем, что введеное значение > 0
         bot.send_message(to_chat_id,
-                         'count_create_conf: ' + count_create_conf +
+                         'count_create_conf: ' + str(check_message_text) +
                          '\nuser_id: ' + user_id +
                          '\nuser_name: ' + user_name +
                          '\ndate_time: ' + date_time
@@ -38,22 +39,22 @@ def change_conf_command_start(message):
 
 
 def change_conf_control(change_conf_message):
-    user_id = str(change_conf_message.from_user.id)
-    user_name = str(change_conf_message.from_user.username)
-    count_change_conf = str(change_conf_message.text)
-    date_time = str(datetime.now())
+    user_id = str(change_conf_message.from_user.id)  # id юзера, написавшего в бота
+    user_name = str(change_conf_message.from_user.username)  # нейм юзера, написавшего в бота
+    count_change_conf = str(change_conf_message.text)  # текст юзера, написавшего в бота
+    date_time = str(datetime.now())  # текущий datetime
     to_chat_id = -1001427883840  # id чата vlg_worker_bot_report
-    check_message_text = int(change_conf_message.text)
-    if isinstance(check_message_text, int) and check_message_text > 0:
+    check_message_text = int(re.sub('\D', '', count_change_conf))  # вырезаем все символы и приводим к int
+    if isinstance(check_message_text, int) and check_message_text > 0:  # проверяем, что введеное значение > 0
         bot.send_message(to_chat_id,
-                         'count_change_conf: ' + count_change_conf +
+                         'count_change_conf: ' + str(check_message_text) +
                          '\nuser_id: ' + user_id +
                          '\nuser_name: ' + user_name +
                          '\ndate_time: ' + date_time
-                         )
-        bot.send_message(change_conf_message.from_user.id, 'Принято')
+                         )  # отправляем сообщение в чат vlg_worker_bot_report
+        bot.send_message(change_conf_message.from_user.id, 'Принято')  # Сообщаем пользователю, что все прошло успешно
     else:
-        bot.send_message(change_conf_message.from_user.id, 'Запусти команду заново и введи целое число > 0')
+        bot.send_message(change_conf_message.from_user.id, 'Запусти команду заново и введи целое число > 0')  # Сообщаем пользователю о некорректном воде
 
 
 bot.polling(none_stop=True, interval=0)
