@@ -59,21 +59,28 @@ def change_conf_control(change_conf_message):
 
 
 @bot.message_handler(commands=["notify_all"])
-def notify_all(message):
+def notify_all(message):  # получает нотификацию и передает на отправку
     bot.send_message(message.from_user.id, 'Что нужно сообщить?')
     notify_all_message = message
     bot.register_next_step_handler(notify_all_message, send_notify_all)
 
 
-def send_notify_all(notify_all_message):
+def send_notify_all(notify_all_message):  # отправляет нотификацию
     date_time = str(datetime.now())  # текущий datetime
     bot.send_message(380895469, date_time + '\n' + notify_all_message.text)  # Клопов
     bot.send_message(676190873, date_time + '\n' + notify_all_message.text)  # Спиридонов
     bot.send_message(419881751, date_time + '\n' + notify_all_message.text)  # Ефимов
     bot.send_message(790261504, date_time + '\n' + notify_all_message.text)  # Лисицкий
     bot.send_message(275972221, date_time + '\n' + notify_all_message.text)  # Иванова
-    chat_id_vlg_integration = -1001186875335
-    bot.send_message(chat_id_vlg_integration, date_time + '\n' + notify_all_message.text)  # VLG Integration
+    bot.send_message(-1001186875335, date_time + '\n' + notify_all_message.text)  # VLG Integration
+
+
+def send_reminder_all():
+    reminder_time = '18:05:00.000000'
+    if reminder_time == datetime.now().time():
+        bot.send_message(380895469, 'Тест')  # Клопов
+    else:
+        pass
 
 
 bot.polling(none_stop=True, interval=0)
