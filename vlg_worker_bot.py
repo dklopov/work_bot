@@ -54,7 +54,19 @@ def change_conf_control(change_conf_message):
                          )  # отправляем сообщение в чат vlg_worker_bot_report
         bot.send_message(change_conf_message.from_user.id, 'Принято')  # Сообщаем пользователю, что все прошло успешно
     else:
-        bot.send_message(change_conf_message.from_user.id, 'Запусти команду заново и введи целое число > 0')  # Сообщаем пользователю о некорректном воде
+        bot.send_message(change_conf_message.from_user.id,
+                         'Запусти команду заново и введи целое число > 0')  # Сообщаем пользователю о некорректном воде
+
+
+@bot.message_handler(commands=["notify_all"])
+def notify_all(message):
+    bot.send_message(message.from_user.id, 'Что нужно сообщить?')
+    notify_all_message = message
+    bot.register_next_step_handler(notify_all_message, send_notify_all)
+
+
+def send_notify_all(notify_all_message):
+    bot.send_message(380895469, notify_all_message)
 
 
 bot.polling(none_stop=True, interval=0)
