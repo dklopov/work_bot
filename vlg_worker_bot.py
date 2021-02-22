@@ -75,12 +75,4 @@ def send_notify_all(notify_all_message):  # отправляет нотифик�
     bot.send_message(-1001186875335, date_time + '\n' + notify_all_message.text)  # VLG Integration
 
 
-def send_reminder_all():
-    reminder_time = '14:09:00.000000'
-    if reminder_time == datetime.now().time():
-        bot.send_message(380895469, 'Тест')  # Клопов
-    else:
-        pass
-
-
 bot.polling(none_stop=True, interval=0)
