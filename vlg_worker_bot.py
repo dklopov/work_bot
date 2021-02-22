@@ -70,7 +70,7 @@ def send_notify_all(notify_all_message):
     bot.send_message(676190873, notify_all_message.text)  # Спиридонов
     bot.send_message(419881751, notify_all_message.text)  # Ефимов
     bot.send_message(790261504, notify_all_message.text)  # Лисицкий
-    bot.send_message(790261504, notify_all_message.text)  # Иванова
+    bot.send_message(275972221, notify_all_message.text)  # Иванова
 
 
 bot.polling(none_stop=True, interval=0)
