@@ -76,7 +76,7 @@ def send_notify_all(notify_all_message):  # отправляет нотифик�
 
 
 def send_reminder_all():
-    reminder_time = '18:05:00.000000'
+    reminder_time = '17:05:00.000000'
     if reminder_time == datetime.now().time():
         bot.send_message(380895469, 'Тест')  # Клопов
     else:
