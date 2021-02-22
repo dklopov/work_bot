@@ -71,6 +71,7 @@ def send_notify_all(notify_all_message):
     bot.send_message(419881751, notify_all_message.text)  # Ефимов
     bot.send_message(790261504, notify_all_message.text)  # Лисицкий
     bot.send_message(275972221, notify_all_message.text)  # Иванова
+    bot.send_message(-435331905, notify_all_message.text)  # VLG Integration
 
 
 bot.polling(none_stop=True, interval=0)
