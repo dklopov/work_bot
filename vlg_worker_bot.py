@@ -71,7 +71,7 @@ def send_notify_all(notify_all_message):
     # bot.send_message(419881751, notify_all_message.text)  # Ефимов
     # bot.send_message(790261504, notify_all_message.text)  # Лисицкий
     # bot.send_message(275972221, notify_all_message.text)  # Иванова
-    chat_id_vlg_integration = -435331905
+    chat_id_vlg_integration = -1001186875335
     bot.send_message(chat_id_vlg_integration, notify_all_message.text)  # VLG Integration
 
 
