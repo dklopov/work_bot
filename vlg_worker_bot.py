@@ -5,7 +5,7 @@ import re
 bot = telebot.TeleBot("1607313958:AAFyKoJWe7TrDiP0ysplOz8GoYWDnKuZ7Pg")
 
 users_dict = {
-    380895469: 'd.klopov',
+    # 380895469: 'd.klopov',
     676190873: 'andrey.spiridonov',
     419881751: 'vladimir.efimov',
     790261504: 'k.lisitskiy'
