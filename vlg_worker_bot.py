@@ -52,7 +52,7 @@ def create_conf_control(create_conf_message):
 
 @bot.message_handler(commands=["change_conf"])
 def change_conf_command_start(message):
-    while message.from_user.id in users_dict:
+    if message.from_user.id in users_dict:
         search_change_conf_url = 'https://graylog.delivery-club.ru/streams/59d3b8d181e8df3e8ecf57ca/search?rangetype=absolute&fields=message%2Csource&width=1920&highlightMessage=&from=' + past_datetime + 'T21%3A00%3A00.000Z&to=' + now_datetime + 'T21%3A00%3A00.000Z&q=%22' + \
                              users_dict[message.from_user.id] + '%22+AND+PUT'
         bot.send_message(message.from_user.id, 'Укажи количество измененных конфигураций\n\nСсылка на поиск:' + search_change_conf_url)
