@@ -21,14 +21,15 @@ past_datetime = now_year + '-' + now_month + '-' + past_day
 
 @bot.message_handler(commands=["create_conf"])
 def create_conf_command_start(message):
-    if message.from_user.id in users_dict:
+    while message.from_user.id in users_dict:
         search_create_conf_url = 'https://graylog.delivery-club.ru/streams/59d3b8d181e8df3e8ecf57ca/search?rangetype=absolute&fields=message%2Csource&width=1920&highlightMessage=&from=' + past_datetime + 'T21%3A00%3A00.000Z&to=' + now_datetime + 'T21%3A00%3A00.000Z&q=%22' + \
                              users_dict[message.from_user.id] + '%22+AND+POST'
+        bot.send_message(message.from_user.id, 'Укажи количество созданных конфигураций\n' + search_create_conf_url)
+        create_conf_message = message
+        bot.register_next_step_handler(create_conf_message, create_conf_control)
     else:
         bot.send_message(message.from_user.id, 'Вакансий в интеграции нет, хватит сюда писать')
-    bot.send_message(message.from_user.id, 'Укажи количество созданных конфигураций\n' + search_create_conf_url)
-    create_conf_message = message
-    bot.register_next_step_handler(create_conf_message, create_conf_control)
+
 
 
 def create_conf_control(create_conf_message):
