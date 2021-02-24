@@ -5,7 +5,7 @@ import re
 bot = telebot.TeleBot("1607313958:AAFyKoJWe7TrDiP0ysplOz8GoYWDnKuZ7Pg")
 
 users_dict = {
-    # 380895469: 'd.klopov',
+    380895469: 'd.klopov',
     676190873: 'andrey.spiridonov',
     419881751: 'vladimir.efimov',
     790261504: 'k.lisitskiy'
@@ -24,12 +24,11 @@ def create_conf_command_start(message):
     while message.from_user.id in users_dict:
         search_create_conf_url = 'https://graylog.delivery-club.ru/streams/59d3b8d181e8df3e8ecf57ca/search?rangetype=absolute&fields=message%2Csource&width=1920&highlightMessage=&from=' + past_datetime + 'T21%3A00%3A00.000Z&to=' + now_datetime + 'T21%3A00%3A00.000Z&q=%22' + \
                              users_dict[message.from_user.id] + '%22+AND+POST'
-        bot.send_message(message.from_user.id, 'Укажи количество созданных конфигураций\n' + search_create_conf_url)
+        bot.send_message(message.from_user.id, 'Укажи количество созданных конфигураций\n\nСсылка на поиск:' + search_create_conf_url)
         create_conf_message = message
         bot.register_next_step_handler(create_conf_message, create_conf_control)
     else:
-        bot.send_message(message.from_user.id, 'Вакансий в интеграции нет, хватит сюда писать')
-
+        bot.send_message(message.from_user.id, 'Вакансий в интеграциях нет, хватит сюда писать')
 
 
 def create_conf_control(create_conf_message):
@@ -53,11 +52,14 @@ def create_conf_control(create_conf_message):
 
 @bot.message_handler(commands=["change_conf"])
 def change_conf_command_start(message):
-    search_change_conf_url = 'https://graylog.delivery-club.ru/streams/59d3b8d181e8df3e8ecf57ca/search?rangetype=absolute&fields=message%2Csource&width=1920&highlightMessage=&from=' + past_datetime + 'T21%3A00%3A00.000Z&to=' + now_datetime + 'T21%3A00%3A00.000Z&q=%22' + \
+    while message.from_user.id in users_dict:
+        search_change_conf_url = 'https://graylog.delivery-club.ru/streams/59d3b8d181e8df3e8ecf57ca/search?rangetype=absolute&fields=message%2Csource&width=1920&highlightMessage=&from=' + past_datetime + 'T21%3A00%3A00.000Z&to=' + now_datetime + 'T21%3A00%3A00.000Z&q=%22' + \
                              users_dict[message.from_user.id] + '%22+AND+PUT'
-    bot.send_message(message.from_user.id, 'Укажи количество измененных конфигураций\n' + search_change_conf_url)
-    change_conf_message = message
-    bot.register_next_step_handler(change_conf_message, change_conf_control)
+        bot.send_message(message.from_user.id, 'Укажи количество измененных конфигураций\n\nСсылка на поиск:' + search_change_conf_url)
+        change_conf_message = message
+        bot.register_next_step_handler(change_conf_message, change_conf_control)
+    else:
+        bot.send_message(message.from_user.id, 'Вакансий в интеграциях нет, хватит сюда писать')
 
 
 def change_conf_control(change_conf_message):
