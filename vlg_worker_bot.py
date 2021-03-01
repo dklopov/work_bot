@@ -99,4 +99,23 @@ def send_notify_all(notify_all_message):  # отправляет нотифик�
     bot.send_message(-1001186875335, date_time + '\n' + notify_all_message.text)  # VLG Integration
 
 
+@bot.message_handler(commands=["alarm"])
+def alarm_start(message):  # получает нотификацию и передает на отправку
+    if str(datetime.now().time()) >= "16:00:00.000000":
+        bot.send_message(message.chat.id, 'Что случилось?\n')
+        alarm_message = message
+        bot.register_next_step_handler(alarm_message, send_notify_alarm)
+    else:
+        bot.send_message(message.chat.id, 'Дежурства еще не начались, попробуй в 19:00')
+
+
+def send_notify_alarm(alarm_message):  # отправляет нотификацию дежурному + чат
+    date_time = str(datetime.now())  # текущий datetime
+    bot.send_message(676190873, date_time + '\n' + alarm_message.text)  # Спиридонов
+    # bot.send_message(419881751, date_time + '\n' + alarm_message.text)  # Ефимов
+    # bot.send_message(790261504, date_time + '\n' + alarm_message.text)  # Лисицкий
+    bot.send_message(-1001186875335, date_time + '\n' + alarm_message.text)  # VLG Integration
+    bot.send_message(-1001310159379, date_time + '\nПринято\n\n@t3reb хелп')  # VST Onl
+
+
 bot.polling(none_stop=True, interval=0)
