@@ -13,8 +13,8 @@ users_dict = {
 
 now_year = str(datetime.now().year)
 now_month = '0' + str(datetime.now().month)
-now_day = str(datetime.now().day)
-past_day = str(datetime.now().day - 1)
+now_day = '0' + str(datetime.now().day)
+past_day = '0' + str(datetime.now().day - 1)
 now_datetime = now_year + '-' + now_month + '-' + now_day
 past_datetime = now_year + '-' + now_month + '-' + past_day
 
