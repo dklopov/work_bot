@@ -19,6 +19,11 @@ now_datetime = now_year + '-' + now_month + '-' + now_day
 past_datetime = now_year + '-' + now_month + '-' + past_day
 
 
+@bot.message_handler(commands=["health_check"])
+def get_email_start(message):
+    bot.send_message(message.from_user.id, 'Привет, я живой и готов работать!')
+
+
 @bot.message_handler(commands=["create_conf"])
 def create_conf_command_start(message):
     if message.from_user.id in users_dict:
