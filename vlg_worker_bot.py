@@ -28,8 +28,9 @@ def get_email_start(message):
 def create_conf_command_start(message):
     if message.from_user.id in users_dict:
         search_create_conf_url = 'https://graylog.delivery-club.ru/streams/59d3b8d181e8df3e8ecf57ca/search?rangetype=absolute&fields=message%2Csource&width=1920&highlightMessage=&from=' + past_datetime + 'T21%3A00%3A00.000Z&to=' + now_datetime + 'T21%3A00%3A00.000Z&q=%22' + \
-                             users_dict[message.from_user.id] + '%22+AND+POST'
-        bot.send_message(message.from_user.id, 'Укажи количество созданных конфигураций\n\nСсылка на поиск:' + search_create_conf_url)
+                                 users_dict[message.from_user.id] + '%22+AND+POST'
+        bot.send_message(message.from_user.id,
+                         'Укажи количество созданных конфигураций\n\nСсылка на поиск:' + search_create_conf_url)
         create_conf_message = message
         bot.register_next_step_handler(create_conf_message, create_conf_control)
     else:
@@ -59,8 +60,9 @@ def create_conf_control(create_conf_message):
 def change_conf_command_start(message):
     if message.from_user.id in users_dict:
         search_change_conf_url = 'https://graylog.delivery-club.ru/streams/59d3b8d181e8df3e8ecf57ca/search?rangetype=absolute&fields=message%2Csource&width=1920&highlightMessage=&from=' + past_datetime + 'T21%3A00%3A00.000Z&to=' + now_datetime + 'T21%3A00%3A00.000Z&q=%22' + \
-                             users_dict[message.from_user.id] + '%22+AND+PUT'
-        bot.send_message(message.from_user.id, 'Укажи количество измененных конфигураций\n\nСсылка на поиск:' + search_change_conf_url)
+                                 users_dict[message.from_user.id] + '%22+AND+PUT'
+        bot.send_message(message.from_user.id,
+                         'Укажи количество измененных конфигураций\n\nСсылка на поиск:' + search_change_conf_url)
         change_conf_message = message
         bot.register_next_step_handler(change_conf_message, change_conf_control)
     else:
@@ -89,9 +91,12 @@ def change_conf_control(change_conf_message):
 
 @bot.message_handler(commands=["notify_all"])
 def notify_all(message):  # получает нотификацию и передает на отправку
-    bot.send_message(message.from_user.id, 'Что нужно сообщить?')
-    notify_all_message = message
-    bot.register_next_step_handler(notify_all_message, send_notify_all)
+    if message.from_user.id == '380895469':
+        bot.send_message(message.from_user.id, 'Что нужно сообщить?')
+        notify_all_message = message
+        bot.register_next_step_handler(notify_all_message, send_notify_all)
+    else:
+        bot.send_message(message.from_user.id, 'Нет прав на выполнение этой команды?')
 
 
 def send_notify_all(notify_all_message):  # отправляет нотификацию
@@ -131,12 +136,12 @@ def source_command_start(message):  # получает название конф
 
 def pcm_config_name(message):
     if message.text not in dict_menus:  # возвращает url с которого restaurant_plugin получает меню
-        bot.send_message(message.from_user.id,
+        bot.send_message(message.chat.id,
                          'Нужно добавить данные в "dict_menus", перешли это сообщение @dimabeatmaker'
                          '\n\n' + message.text + ": https://pos-conf-master.delivery-club.ru/admin/configurator/restaurant-plugin/configuration/" + message.text)
     else:
         result = dict_menus[message.text]
-        bot.send_message(message.from_user.id, result)
+        bot.send_message(message.chat.id, result)
 
 
 dict_menus = {
