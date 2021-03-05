@@ -91,12 +91,9 @@ def change_conf_control(change_conf_message):
 
 @bot.message_handler(commands=["notify_all"])
 def notify_all(message):  # получает нотификацию и передает на отправку
-    if message.from_user.id == '380895469':
         bot.send_message(message.from_user.id, 'Что нужно сообщить?')
         notify_all_message = message
         bot.register_next_step_handler(notify_all_message, send_notify_all)
-    else:
-        bot.send_message(message.from_user.id, 'Нет прав на выполнение этой команды?')
 
 
 def send_notify_all(notify_all_message):  # отправляет нотификацию
