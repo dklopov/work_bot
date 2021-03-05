@@ -121,8 +121,8 @@ def alarm_start(message):  # получает нотификацию и пере
 
 def send_notify_alarm(alarm_message):  # отправляет нотификацию дежурному + чат
     date_time = str(datetime.now())  # текущий datetime
-    bot.send_message(676190873, date_time + '\n' + alarm_message.text)  # Спиридонов
-    # bot.send_message(419881751, date_time + '\n' + alarm_message.text)  # Ефимов
+    # bot.send_message(676190873, date_time + '\n' + alarm_message.text)  # Спиридонов
+    bot.send_message(419881751, date_time + '\n' + alarm_message.text)  # Ефимов
     # bot.send_message(790261504, date_time + '\n' + alarm_message.text)  # Лисицкий
     bot.send_message(-1001186875335, date_time + '\n' + alarm_message.text)  # VLG Integration
     bot.send_message(-1001310159379, date_time + '\nПринято\n\n@t3reb хелп')  # VST Onl
