@@ -91,9 +91,9 @@ def change_conf_control(change_conf_message):
 
 @bot.message_handler(commands=["notify_all"])
 def notify_all(message):  # получает нотификацию и передает на отправку
-        bot.send_message(message.from_user.id, 'Что нужно сообщить?')
-        notify_all_message = message
-        bot.register_next_step_handler(notify_all_message, send_notify_all)
+    bot.send_message(message.from_user.id, 'Что нужно сообщить?')
+    notify_all_message = message
+    bot.register_next_step_handler(notify_all_message, send_notify_all)
 
 
 def send_notify_all(notify_all_message):  # отправляет нотификацию
@@ -139,6 +139,12 @@ def pcm_config_name(message):
     else:
         result = dict_menus[message.text]
         bot.send_message(message.chat.id, result)
+
+
+@bot.message_handler(commands=["get_ip"])
+def alarm_start(message):  # получает нотификацию и передает на отправку
+    bot.send_message(message.from_user.id, 'kubernetes:\n95.163.58.128/25\n87.229.226.8/29\n213.80.143.24/29')
+    bot.send_message(message.from_user.id, 'kubernetes + integrations.dc:\n95.163.58.128/25\n87.229.226.8/29\n213.80.143.24/29\n128.140.175.160/27\n128.140.175.0/26\n128.140.175.64/26\n128.140.175.192/26\n128.140.175.213')
 
 
 dict_menus = {
