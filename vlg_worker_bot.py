@@ -2,7 +2,7 @@ import telebot
 from datetime import datetime
 import re
 
-bot = telebot.TeleBot("1607313958:AAFyKoJWe7TrDiP0ysplOz8GoYWDnKuZ7Pg")
+bot = telebot.TeleBot("1607313958:AAE21rKucNF98OI99Of-5CdWUmtYkoxXOG0")
 
 users_dict = {
     380895469: 'd.klopov',
