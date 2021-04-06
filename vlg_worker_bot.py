@@ -144,7 +144,28 @@ def pcm_config_name(message):
 @bot.message_handler(commands=["get_ip"])
 def alarm_start(message):  # получает нотификацию и передает на отправку
     bot.send_message(message.from_user.id, 'kubernetes:\n95.163.58.128/25\n87.229.226.8/29\n213.80.143.24/29')
-    bot.send_message(message.from_user.id, 'kubernetes + integrations.dc:\n95.163.58.128/25\n87.229.226.8/29\n213.80.143.24/29\n128.140.175.160/27\n128.140.175.0/26\n128.140.175.64/26\n128.140.175.192/26\n128.140.175.213')
+    bot.send_message(message.from_user.id,
+                     'kubernetes + integrations.dc:\n95.163.58.128/25\n87.229.226.8/29\n213.80.143.24/29\n128.140.175.160/27\n128.140.175.0/26\n128.140.175.64/26\n128.140.175.192/26\n128.140.175.213')
+
+
+@bot.message_handler(commands=["kfc_update_chain"])
+def kfc_update_chain_command_start(message):
+    bot.send_message(message.chat.id, "Введи чейн, который надо обновить")
+    bot.register_next_step_handler(message, kfc_update_chain)
+
+
+def kfc_update_chain(message):
+    bot.send_message(message.chat.id, "Кликни по ссылке: " + "https://www.delivery-club.ru/ajax/manage/?m=xml_update&id=" + message.text)
+
+
+@bot.message_handler(commands=["kfc_update_vendor"])
+def kfc_update_vendor_command_start(message):
+    bot.send_message(message.chat.id, "Введи вендор, который надо обновить")
+    bot.register_next_step_handler(message, kfc_update_vendor)
+
+
+def kfc_update_vendor(message):
+    bot.send_message(message.chat.id, "Кликни по ссылке: " + "https://www.delivery-club.ru/ajax/sd/?m=xml_update&id=" + message.text)
 
 
 dict_menus = {
