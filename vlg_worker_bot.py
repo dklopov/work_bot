@@ -120,9 +120,9 @@ def send_notify_alarm(alarm_message):  # отправляет нотификац
     date_time = str(datetime.now())  # текущий datetime
     # bot.send_message(676190873, date_time + '\n' + alarm_message.text)  # Спиридонов
     # bot.send_message(419881751, date_time + '\n' + alarm_message.text)  # Ефимов
-    bot.send_message(790261504, date_time + '\n' + alarm_message.text)  # Лисицкий
+    # bot.send_message(790261504, date_time + '\n' + alarm_message.text)  # Лисицкий
     bot.send_message(-1001186875335, date_time + '\n' + alarm_message.text)  # VLG Integration
-    bot.send_message(-1001310159379, date_time + '\nПринято\n\n@MedellinSavior хелп')  # VST Onl
+    bot.send_message(-1001310159379, date_time + '\nПринято')  # VST Onl
 
 
 @bot.message_handler(commands=["source"])
